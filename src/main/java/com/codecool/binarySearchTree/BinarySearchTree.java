@@ -9,16 +9,36 @@ public class BinarySearchTree {
     }
 
     public static BinarySearchTree buildTree(Integer[] intArray) {
-        return new BinarySearchTree(intArray);
+        BinarySearchTree bst = new BinarySearchTree(intArray);
+        return bst;
     }
 
 
 
     private Node buildNodes(Integer[] elements) {
         if (elements.length > 0) {
-            int middle = (int) Math.floor(elements.length / 2);
+            int middle = ((int) Math.floor(elements.length / 2)) - 1;
+            int middleIndex = middle - 1 < 0 ? 0: middle;
+            Node newNode = new Node(elements[middleIndex]);
+            newNode.setLeftNode(buildNodes(
+                copyArray(middleIndex, elements, 0, middleIndex)
+            ));
+            if (elements.length > 2) {
+                int itemAfterMiddle = middleIndex + 1;
+                newNode.setRightNode(buildNodes(
+                    copyArray(itemAfterMiddle, elements, itemAfterMiddle, itemAfterMiddle)
+                ));
+            }
+            return newNode;
         }
         return null;
+    }
+
+
+    private Integer[] copyArray(int middleIndex, Integer[] elements, int srcPos, int length) {
+        Integer[] integerArray = new Integer[middleIndex];
+        System.arraycopy(elements, srcPos, integerArray, 0, length);
+        return integerArray;
     }
 
 
@@ -98,7 +118,7 @@ public class BinarySearchTree {
 
 
     public static void main(String[] args) {
-        Integer[] intArray = {5, 1, 3, 5, 0, 4 ,5 ,6 ,7 ,8};
+        Integer[] intArray = {5, 1, 3, 5, 0, 1, 2, 3, 4 ,5 ,6 ,7 ,8};
         System.out.println(minimalHeight(intArray, 13));
     }
 }
