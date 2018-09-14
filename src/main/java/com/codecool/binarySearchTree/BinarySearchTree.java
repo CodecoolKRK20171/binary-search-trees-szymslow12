@@ -83,7 +83,6 @@ public class BinarySearchTree {
 
     public boolean searchElement(Integer value) {
         Node currentNode = root;
-
         while (currentNode != null) {
             if (currentNode.getValue() == value) {
                 return true;
@@ -94,6 +93,31 @@ public class BinarySearchTree {
             }
         }
         return false;
+    }
+
+
+    public void remove(Integer value) {
+        if (root.getValue() == value) {
+            root = null;
+            return;
+        }
+
+        Node parent = root;
+        Node current = root;
+
+        while (current != null) {
+            if (current.getValue() == value) {
+                parent.remove(current);
+                return;
+            } else if (value <= current.getValue()) {
+                parent = current;
+                current = current.leftNode();
+            } else {
+                parent = current;
+                current = current.rightNode();
+            }
+        }
+        throw new IllegalArgumentException("Element is not in tree!");
     }
 
 
