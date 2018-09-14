@@ -46,4 +46,15 @@ public class Node {
     public String toString() {
         return Integer.toString(value);
     }
+
+
+    public void remove(Node child) {
+        if (left == child) {
+            left = null;
+        } else if (right == child) {
+            right = null;
+        } else {
+            throw new IllegalArgumentException("Element doesn't exist!");
+        }
+    }
 }
