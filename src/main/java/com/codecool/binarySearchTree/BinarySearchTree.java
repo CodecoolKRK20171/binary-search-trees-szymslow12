@@ -23,7 +23,7 @@ public class BinarySearchTree {
             ));
             if (elements.length > 2) {
                 newNode.setRightNode(buildNodes(
-                    copyArray(middle, elements, middle, middle)
+                    copyArray(middle - 1, elements, middle + 1, middle - 1)
                 ));
             }
             return newNode;
