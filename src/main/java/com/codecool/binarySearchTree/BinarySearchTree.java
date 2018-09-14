@@ -9,8 +9,7 @@ public class BinarySearchTree {
     }
 
     public static BinarySearchTree buildTree(Integer[] intArray) {
-        BinarySearchTree bst = new BinarySearchTree(intArray);
-        return bst;
+        return new BinarySearchTree(intArray);
     }
 
 
@@ -35,14 +34,12 @@ public class BinarySearchTree {
 
     private Integer[] copyArray(int middleIndex, Integer[] elements, int srcPos, int length) {
         Integer[] integerArray = new Integer[middleIndex];
-        System.out.println(integerArray.length);
         System.arraycopy(elements, srcPos, integerArray, 0, length);
         return integerArray;
     }
 
 
     public void add(Integer value) {
-        System.out.println(root);
         Node newNode = new Node(value);
         if (root.getValue() == value)
             throw new IllegalArgumentException("Elements already is in the tree!");
@@ -116,7 +113,10 @@ public class BinarySearchTree {
 
 
     public static void main(String[] args) {
-        Integer[] intArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        Integer[] intArray = new Integer[50];
+        for (int i = 0; i < 50; i++) {
+            intArray[i] = i * 2 + 5;
+        }
         BinarySearchTree bst = buildTree(intArray);
         System.out.println(minimalHeight(intArray, 13));
     }
