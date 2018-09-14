@@ -17,16 +17,14 @@ public class BinarySearchTree {
 
     private Node buildNodes(Integer[] elements) {
         if (elements.length > 0) {
-            int middle = ((int) Math.floor(elements.length / 2)) - 1;
-            int middleIndex = middle - 1 < 0 ? 0: middle;
-            Node newNode = new Node(elements[middleIndex]);
+            int middle = ((int) Math.floor(elements.length / 2));
+            Node newNode = new Node(elements[middle]);
             newNode.setLeftNode(buildNodes(
-                copyArray(middleIndex, elements, 0, middleIndex)
+                copyArray(middle, elements, 0, middle)
             ));
             if (elements.length > 2) {
-                int itemAfterMiddle = middleIndex + 1;
                 newNode.setRightNode(buildNodes(
-                    copyArray(itemAfterMiddle, elements, itemAfterMiddle, itemAfterMiddle)
+                    copyArray(middle, elements, middle, middle)
                 ));
             }
             return newNode;
@@ -37,18 +35,17 @@ public class BinarySearchTree {
 
     private Integer[] copyArray(int middleIndex, Integer[] elements, int srcPos, int length) {
         Integer[] integerArray = new Integer[middleIndex];
+        System.out.println(integerArray.length);
         System.arraycopy(elements, srcPos, integerArray, 0, length);
         return integerArray;
     }
 
 
     public void add(Integer value) {
+        System.out.println(root);
         Node newNode = new Node(value);
-        if (root == null) {
-            root = newNode;
-            return;
-        }
-
+        if (root.getValue() == value)
+            throw new IllegalArgumentException("Elements already is in the tree!");
         if (value <= root.getValue()) {
             Node leftSiteOfRoot = root.leftNode();
             if (leftSiteOfRoot == null)
@@ -64,8 +61,9 @@ public class BinarySearchTree {
 
     public void addNodeToProperParent(Node parent, Node newNode) {
         while (parent != null) {
-            System.out.print(newNode.getValue() + " - " + parent.getValue());
-            if (newNode.getValue() <= parent.getValue()) {
+            if (newNode.getValue() == parent.getValue()) {
+                throw new IllegalArgumentException("Element already is in the tree!");
+            } else if (newNode.getValue() <= parent.getValue()) {
                 if (parent.leftNode() == null) {
                     parent.setLeftNode(newNode);
                     return;
@@ -118,7 +116,8 @@ public class BinarySearchTree {
 
 
     public static void main(String[] args) {
-        Integer[] intArray = {5, 1, 3, 5, 0, 1, 2, 3, 4 ,5 ,6 ,7 ,8};
+        Integer[] intArray = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+        BinarySearchTree bst = buildTree(intArray);
         System.out.println(minimalHeight(intArray, 13));
     }
 }
