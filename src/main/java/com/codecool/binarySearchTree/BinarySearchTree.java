@@ -104,20 +104,13 @@ public class BinarySearchTree {
     }
 
 
-
-
-    public static int minimalHeight(Integer[] intArray, int minimalHeight) {
-        BinarySearchTree bsn = buildTree(intArray);
-        return bsn.minimalHeight();
-    }
-
-
     public static void main(String[] args) {
         Integer[] intArray = new Integer[50];
         for (int i = 0; i < 50; i++) {
             intArray[i] = i * 2 + 5;
         }
         BinarySearchTree bst = buildTree(intArray);
-        System.out.println(minimalHeight(intArray, 13));
+        System.out.println(bst.minimalHeight());
+        System.out.println(new BinarySearchTree(new Integer[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9}).minimalHeight());
     }
 }
