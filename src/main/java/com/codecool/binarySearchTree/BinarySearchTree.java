@@ -8,10 +8,10 @@ public class BinarySearchTree {
         root = buildNodes(elements);
     }
 
+
     public static BinarySearchTree buildTree(Integer[] intArray) {
         return new BinarySearchTree(intArray);
     }
-
 
 
     private Node buildNodes(Integer[] elements) {
@@ -79,6 +79,12 @@ public class BinarySearchTree {
             }
         }
     }
+
+
+    public boolean searchElement(Integer value) {
+        return false;
+    }
+
 
     public int minimalHeight() {
         return minimalHeight(root);
