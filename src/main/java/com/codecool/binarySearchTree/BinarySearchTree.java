@@ -42,7 +42,8 @@ public class BinarySearchTree {
     public void add(Integer value) {
         Node newNode = new Node(value);
         if (root.getValue() == value)
-            throw new IllegalArgumentException("Elements already is in the tree!");
+            throw new IllegalArgumentException("Element already is in the tree!");
+
         if (value <= root.getValue()) {
             Node leftSiteOfRoot = root.leftNode();
             if (leftSiteOfRoot == null)
@@ -56,7 +57,8 @@ public class BinarySearchTree {
         }
     }
 
-    public void addNodeToProperParent(Node parent, Node newNode) {
+
+    private void addNodeToProperParent(Node parent, Node newNode) {
         while (parent != null) {
             if (newNode.getValue() == parent.getValue()) {
                 throw new IllegalArgumentException("Element already is in the tree!");
